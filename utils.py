@@ -34,6 +34,7 @@ def test_model(test_dataloader, model, device, loss_fcn):
             subgraph, feats, labels = test_data
             feats = feats.to(device)
             labels = labels.to(device)
+            subgraph = subgraph.to(device)
             test_score_list.append(evaluate(feats, model, subgraph, labels.float(), loss_fcn)[0])
         mean_score = np.array(test_score_list).mean()
         print(f"F1-Score on testset:        {mean_score:.4f}")
@@ -159,8 +160,8 @@ def get_data_loader(args):
     valid_dataset = PPIDataset(mode='valid')
     test_dataset = PPIDataset(mode='test')
     
-    train_dataloader = DataLoader(train_dataset, batch_size=args.batch_size, collate_fn=collate, num_workers=4, shuffle=True)
-    fixed_train_dataloader = DataLoader(train_dataset, batch_size=args.batch_size, collate_fn=collate, num_workers=4)
+    train_dataloader = DataLoader(train_dataset, batch_size=args.batch_size, collate_fn=collate, num_workers=2, shuffle=True)
+    fixed_train_dataloader = DataLoader(train_dataset, batch_size=args.batch_size, collate_fn=collate, num_workers=2)
     valid_dataloader = DataLoader(valid_dataset, batch_size=args.batch_size, collate_fn=collate, num_workers=2)
     test_dataloader = DataLoader(test_dataset, batch_size=args.batch_size, collate_fn=collate, num_workers=2)
 
