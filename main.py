@@ -163,6 +163,7 @@ def train_teacher(args, model, data, device):
                 subgraph, feats, labels = valid_data
                 feats = feats.to(device)
                 labels = labels.to(device)
+                subgraph = subgraph.to(device)
                 score, val_loss = evaluate(feats.float(), model, subgraph, labels.float(), loss_fcn)
                 score_list.append(score)
                 val_loss_list.append(val_loss)
@@ -177,6 +178,7 @@ def train_teacher(args, model, data, device):
                 subgraph, feats, labels = train_data
                 feats = feats.to(device)
                 labels = labels.to(device)
+                subgraph = subgraph.to(device)
                 train_score_list.append(evaluate(feats, model, subgraph, labels.float(), loss_fcn)[0])
             print(f"F1-Score on trainset:        {np.array(train_score_list).mean():.4f}")
 
@@ -187,6 +189,7 @@ def train_teacher(args, model, data, device):
         subgraph, feats, labels = test_data
         feats = feats.to(device)
         labels = labels.to(device)
+        subgraph = subgraph.to(device)
         test_score_list.append(evaluate(feats, model, subgraph, labels.float(), loss_fcn)[0])
     print(f"F1-Score on testset:        {np.array(test_score_list).mean():.4f}")
     
