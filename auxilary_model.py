@@ -6,7 +6,7 @@ from local_structure import get_local_model, get_upsampling_model
 
 
 def collect_model(args, data_info):
-    device = torch.device("cpu") if args.gpu<0 else torch.device("cuda:" + str(args.gpu))
+    device = torch.device("cpu") if args.gpu<0 else torch.device("cuda")
     
     feat_info = get_feat_info(args)
     
