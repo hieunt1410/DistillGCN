@@ -144,6 +144,7 @@ def train_teacher(args, model, data, device):
             subgraph, feats, labels = batch_data
             feats = feats.to(device)
             labels = labels.to(device)
+            subgraph = subgraph.to(device)
             model.g = subgraph
             for layer in model.gat_layers:
                 layer.g = subgraph
