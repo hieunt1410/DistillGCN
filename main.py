@@ -62,9 +62,11 @@ def train_student(args, auxiliary_model, data, device):
 
             feats = feats.to(device)
             labels = labels.to(device)
+            subgraph = subgraph.to(device)
             fixed_feats = fixed_feats.to(device)
             fixed_labels = fixed_labels.to(device)
-
+            fixed_subgraph = fixed_subgraph.to(device)
+            
             s_model.g = subgraph
             for layer in s_model.gat_layers:
                 layer.g = subgraph
