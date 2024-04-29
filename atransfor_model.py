@@ -3,7 +3,7 @@ import torch.nn.functional as F
 
 import dgl.function as fn
 
-msg_func = fn.copy_u(src='h', out='m')
+msg_func = fn.copy_u(u='h', out='m')
 reduce_func = fn.sum(msg='m', out='h')
 
 class GCNLayer(nn.Module):
