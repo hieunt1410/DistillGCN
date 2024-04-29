@@ -2,7 +2,7 @@ certifi
 cffi
 cycler
 decorator
-dgl
+dgl==0.9.0
 joblib
 kiwisolver
 matplotlib
