@@ -10,14 +10,19 @@ def collect_model(args, data_info):
     
     feat_info = get_feat_info(args)
     
-    t_model = get_teacher(args, data_info);                         t_model.to(device)
-    s_model = get_student(args, data_info);                         s_model.to(device)
+    t_model = get_teacher(args, data_info)
+    t_model.to(device)
+    s_model = get_student(args, data_info)
+    s_model.to(device)
     #d_model = get_discriminator(args, feat_info);                   d_model.to(device)
     #gcn_transformer_model = get_gcn_transformer(args, feat_info);   gcn_transformer_model.to(device)
     #transformer_model = get_transformer_model(args, feat_info);     transformer_model.to(device)
-    local_model = get_local_model(feat_info);                       local_model.to(device)
-    local_model_s = get_local_model(feat_info, upsampling=True);                     local_model_s.to(device)
-    upsampling_model = get_upsampling_model(feat_info);             upsampling_model.to(device)
+    local_model = get_local_model(feat_info)
+    local_model.to(device)
+    local_model_s = get_local_model(feat_info, upsampling=True)
+    local_model_s.to(device)
+    upsampling_model = get_upsampling_model(feat_info)
+    upsampling_model.to(device)
 
     # construct optimizers
     s_model_optimizer = torch.optim.Adam(s_model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
