@@ -262,7 +262,7 @@ if __name__ == '__main__':
     parser.add_argument("--t-num-hidden", type=int, default=256,
                         help="number of hidden units")
 
-    parser.add_argument("--s-epochs", type=int, default=500,
+    parser.add_argument("--s-epochs", type=int, default=100,
                         help="number of training epochs")
     parser.add_argument("--s-num-heads", type=int, default=2,
                         help="number of hidden attention heads")
@@ -288,6 +288,8 @@ if __name__ == '__main__':
     parser.add_argument('--tofull', type=int, default=30,
                         help="change mode to full after tofull epochs")
 
+    parser.add_argument('--task', type=str, default='classification', help="[classification, recognition]")
+    
     args = parser.parse_args()
     print(args)
 

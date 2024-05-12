@@ -69,6 +69,7 @@ def evaluate_model(valid_dataloader, train_dataloader, device, s_model, loss_fcn
             subgraph, feats, labels = valid_data
             feats = feats.to(device)
             labels = labels.to(device)
+            subgraph = subgraph.to(device)
             score, val_loss = evaluate(feats.float(), s_model, subgraph, labels.float(), loss_fcn)
             score_list.append(score)
             val_loss_list.append(val_loss)
@@ -111,18 +112,21 @@ def get_teacher(args, data_info):
     '''args holds the common arguments
     data_info holds some special arugments
     '''
-    heads = ([args.t_num_heads] * args.t_num_layers) + [args.t_num_out_heads]
-    model = GAT(data_info['g'],
-            args.t_num_layers,
-            data_info['num_feats'],
-            args.t_num_hidden,
-            data_info['n_classes'],
-            heads,
-            F.elu,
-            args.in_drop,
-            args.attn_drop,
-            args.alpha,
-            args.residual)
+    if args.task == 'classification':
+        heads = ([args.t_num_heads] * args.t_num_layers) + [args.t_num_out_heads]
+        model = GAT(data_info['g'],
+                args.t_num_layers,
+                data_info['num_feats'],
+                args.t_num_hidden,
+                data_info['n_classes'],
+                heads,
+                F.elu,
+                args.in_drop,
+                args.attn_drop,
+                args.alpha,
+                args.residual)
+    elif args.task == 'recognition':
+        pass
     return model
     
 def get_student(args, data_info):
